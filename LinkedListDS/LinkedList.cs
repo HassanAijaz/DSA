@@ -1,9 +1,9 @@
 ﻿namespace LinkedListDS
 {
-    public class LinkedList
+    public class LinkedList<T>
     {
-        Node? head;
-        Node? tail;
+        Node<T>? head;
+        Node<T>? tail;
         private int length;
         public LinkedList()
         {
@@ -11,11 +11,11 @@
             tail = null;
             length = 0;
         }
-        public Node? GetHead()
+        public Node<T>? GetHead()
         {
             return head;
         }
-        public Node? GetTail()
+        public Node<T>? GetTail()
         {
             return tail;
         }
@@ -25,17 +25,17 @@
         }
         public void PrintLinkedList()
         {
-            Node? temp = head;
+            Node<T>? temp = head;
             while (temp != null)
             {
                 Console.WriteLine(temp.value);
                 temp = temp.next;
             }
         }
-        public void Append(int value)
+        public void Append(T value)
         {
             //Check if we got any item in our linked list. if not we create a new node and point head and tail to new node.
-            Node node = new(value);
+            Node<T> node = new(value);
             if (length == 0) // linked list is empty
             {
                 head = node;
@@ -53,9 +53,9 @@
                 return;
             }
         }
-        public void Prepend(int value)
+        public void Prepend(T value)
         {
-            Node node = new(value);
+            Node<T> node = new(value);
             //Check if we got any item in our linked list. if not we create a new node and point head and head to new node.
             if (length == 0) // linked list is empty
             {
@@ -68,7 +68,7 @@
             head = node;
             length++;
         }
-        public Node? RemoveLast()
+        public Node<T>? RemoveLast()
         {
             if (length == 0) // linked list is empty
             {
@@ -84,8 +84,8 @@
             }
             if (head is not null && tail is not null)
             {
-                Node temp = head;
-                Node pre = head;
+                Node<T> temp = head;
+                Node<T> pre = head;
                 while (temp.next != null)
                 {
                     pre = temp;
@@ -98,7 +98,7 @@
             }
             return null;
         }
-        public Node? RemoveFirst()
+        public Node<T>? RemoveFirst()
         {
             if (length == 0)
             {
@@ -114,13 +114,13 @@
 
             if (head is not null && tail is not null)
             {
-                Node temp = head;
+                Node<T> temp = head;
                 head = head.next;
                 return temp;
             }
             return null;
         }
-        public Node? Get(int index)
+        public Node<T>? Get(int index)
         {
             if (index < 0 || index >= length)
             {
@@ -133,7 +133,7 @@
             }
             return temp;
         }
-        public Node? Set(int index, int value)
+        public Node<T>? Set(int index, T value)
         {
             if (index < 0 || index >= length) { return null; }
             var node = Get(index);
@@ -141,7 +141,7 @@
             node.value = value;
             return node;
         }
-        public bool Insert(int index, int value)
+        public bool Insert(int index, T value)
         {
             if (index < 0 || index > length)
             {
@@ -157,7 +157,7 @@
                 Append(value);
                 return true;
             }
-            Node node = new Node(value);
+            Node<T> node = new (value);
             var temp = Get(index - 1);
             if (temp == null) return false;
             node.next = temp.next;
@@ -165,7 +165,7 @@
             length++;
             return true;
         }
-        public Node? Remove(int index)
+        public Node<T>? Remove(int index)
         {
             if (index < 0 || index >= length) { return null; }
             if (index == 0)
@@ -177,7 +177,7 @@
                 return RemoveLast();
             }
             var prevNode = Get(index - 1);
-            var nodeToRemove = prevNode != null ? prevNode.next : null;
+            var nodeToRemove = prevNode?.next;
             if (prevNode == null || nodeToRemove == null) return null;
             //0 1 2 3 4 5
             prevNode.next = nodeToRemove.next;
@@ -187,14 +187,14 @@
         }
         public void Reverse()
         {
-            Node? temp = head;
+            Node<T>? temp = head;
             head = tail;
             tail = temp;
-            Node? after = temp?.next;
-            Node? before = null;
+            _ = temp?.next;
+            Node<T>? before = null;
             for (int i = 0; i < length; i++)
             {
-                after = temp.next;
+                Node<T>? after = temp.next;
                 temp.next = before;
                 before = temp;
                 temp = after;
@@ -203,11 +203,11 @@
 
         }
     }
-    public class Node
+    public class Node<TValue>
     {
-        public int value;
-        public Node? next;
-        public Node(int value)
+        public TValue value;
+        public Node<TValue>? next;
+        public Node(TValue value)
         {
             this.value = value;
         }

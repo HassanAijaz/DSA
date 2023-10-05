@@ -7,10 +7,9 @@ namespace LinkedListDS
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            LinkedList linkedList = new();
-            Node? head, tail;
-            head = linkedList.GetHead();
-            tail = linkedList.GetTail();
+            var linkedList = new LinkedList<string>();
+            var head = linkedList.GetHead();
+            var tail = linkedList.GetTail();
             if (head != null)
             {
                 Console.WriteLine("head: " + head.value);
@@ -20,18 +19,18 @@ namespace LinkedListDS
                 Console.WriteLine("tail: " + tail.value);
             }
             Console.WriteLine("len: " + linkedList.Length());
-            linkedList.Prepend(012);
-            linkedList.Prepend(-9);
-            linkedList.Prepend(-1232);
-            linkedList.Append(11);
-            linkedList.Append(22);
-            linkedList.Append(33);
-            linkedList.Append(44);
-            linkedList.Append(55);
+            linkedList.Prepend("1");
+            linkedList.Prepend("2");
+            linkedList.Prepend("3");
+            linkedList.Append("4");
+            linkedList.Append("5");
+            linkedList.Append("6");
+            linkedList.Append("7");
+            linkedList.Append("8");
             Console.WriteLine("Get:" + linkedList.Get(5)?.value);
-            Console.WriteLine("Set:" + linkedList.Set(5, -1231231)?.value);
+            Console.WriteLine("Set:" + linkedList.Set(5, "asdasdasdasdasdasd")?.value);
             Console.WriteLine("Get:" + linkedList.Get(5)?.value);
-            linkedList.Insert(5, 120);
+            linkedList.Insert(5, "120");
             Console.WriteLine("Remove:" + linkedList.Remove(5)?.value);
 
 
